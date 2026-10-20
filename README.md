@@ -34,12 +34,12 @@ For a different cluster name or port, use `make up CLUSTER=my-lab HTTP_PORT=2808
 
 ### 1. Public endpoint unavailable
 
-After default-deny NetworkPolicies were introduced, public requests fail and the app logs database hostname resolution errors. Restore access while allowing only ingress-controller traffic into the app and necessary outbound dependencies.
+After default-deny NetworkPolicies were introduced, public requests fail and the app logs database hostname resolution errors.
+   Restore access while allowing only ingress-controller traffic into the app and necessary outbound dependencies.
 
 ### 2. Upgrade and configuration failures
 
 The upgrade from chart 1.0.0 to 1.1.0 fails. A forced upgrade in staging still advertises the old rate limit. Deploy the repository chart with the configured limit, and ensure future configuration changes reach running pods without manual restarts.
-
 ### 3. Errors during deployments
 
 Rolling deployments cause 502/503 errors. Deployments must complete without failed requests under the provided load test or available replicas falling below the configured count.

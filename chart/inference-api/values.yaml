@@ -27,8 +27,9 @@ podAnnotations: {}
 strategy:
   type: RollingUpdate
   rollingUpdate:
+    maxAvailable: 1
     maxUnavailable: 1
-    maxSurge: 0
+    maxSurge: 1
 
 terminationGracePeriodSeconds: 10
 
@@ -76,6 +77,6 @@ securityContext:
       - ALL
 
 networkPolicy:
-  enabled: true
+  enabled: false
   ingressNamespace: ingress-nginx
   dnsNamespace: kube-system

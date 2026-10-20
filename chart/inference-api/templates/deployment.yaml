@@ -31,9 +31,17 @@ spec:
             - name: http
               containerPort: {{ .Values.app.port }}
               protocol: TCP
-          envFrom:
+          volumeMounts:
+            - name: app-config-volume
+              mountPath: /app/config
+              readOnly: true
+          volumes:
+            - name: app-config-volume
+          #envFrom:
             - configMapRef:
                 name: {{ include "inference-api.fullname" . }}
+          
+             
           env:
             - name: DB_PASSWORD
               valueFrom:
