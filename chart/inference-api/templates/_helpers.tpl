@@ -22,11 +22,11 @@
 {{- define "inference-api.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "inference-api.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-helm.sh/chart: {{ include "inference-api.chart" . }}
 {{- end }}
 
 {{- define "inference-api.labels" -}}
 {{ include "inference-api.selectorLabels" . }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+helm.sh/chart: {{ include "inference-api.chart" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}

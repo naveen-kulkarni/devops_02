@@ -30,7 +30,7 @@ spec:
               kubernetes.io/metadata.name: {{ .Values.networkPolicy.ingressNamespace }}
       ports:
         - protocol: TCP
-          port: {{ .Values.service.port }}
+          port: {{ .Values.app.port }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -48,12 +48,14 @@ spec:
     - to:
         - namespaceSelector:
             matchLabels:
-              name: {{ .Values.networkPolicy.dnsNamespace }}
+              kubernetes.io/metadata.name: {{ .Values.networkPolicy.dnsNamespace }}
           podSelector:
             matchLabels:
               k8s-app: kube-dns
       ports:
         - protocol: UDP
+          port: 53
+        - protocol: TCP
           port: 53
     - to:
         - podSelector:
